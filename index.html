@@ -18,5 +18,28 @@
 <section id="members" class="wrap"><div class="section-head"><div class="eyebrow">ALLIANCE ROSTER</div><h2>同盟メンバー</h2><div class="rule"></div><p class="lead">1310王国 · NCBの役職者紹介。ゲーム内の表示名をもとに掲載しています。</p></div><div class="roster"><article class="roster-card leader"><small>R5 · 盟主</small><strong>Lake West 天使様</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>黒猫さんᴺᶜᴮ</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>KUONN</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>えるちゃん</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>めめたんᴺᶜᴮ</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>あずき</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>GRASS 青豚ᴺᶜᴮ</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>ぬんころ</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>orionᴺᶜᴮ Love</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>とき猫ᴺᶜᴮ</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>しゃむべぇ</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>tama</strong></article><article class="roster-card"><small>R4 · 幹部</small><strong>今昔ノン・ダク・レイ物語</strong></article></div><p class="note">※ 名称・役職は提供されたスクリーンショット時点の情報です。公開前に掲載許可をご確認ください。</p></section>
 <section id="events" class="wrap"><div class="section-head"><div class="eyebrow">BATTLE & EVENTS</div><h2>イベント情報</h2><div class="rule"></div></div><div class="events"><article class="event"><h3>KvK 王城戦</h3><p>開催情報や公開可能な案内を掲載予定。詳細な作戦はゲーム内で共有します。</p></article><article class="event"><h3>聖剣争奪戦</h3><p>参加案内やイベント概要を掲載予定。非公開の編成・戦術は掲載しません。</p></article><article class="event"><h3>同盟活動</h3><p>日々の活動やイベント参加に関するお知らせをまとめます。</p></article><article class="event"><h3>ニュース</h3><p>募集状況やサイト更新情報などを順次お知らせします。</p></article></div></section>
 <section id="join" class="join"><div class="wrap"><div class="section-head"><div class="eyebrow">JOIN THE ALLIANCE</div><h2>NCBと共に戦おう</h2><div class="rule"></div><p class="lead">加入・移民の相談は、ゲーム内でNCBの担当者へ。<br>連絡方法と募集条件は確認でき次第、このページに掲載します。</p></div><a class="btn" href="#recruit">募集案内へ戻る</a></div></section>
+
+<section id="news" class="wrap"><div class="section-head"><div class="eyebrow">LATEST NEWS</div><h2>NCBニュース</h2><div class="rule"></div><p class="lead">同盟からのお知らせ・最新情報をお届けします。</p></div><div id="ncb-news-list" class="events"><p class="lead">ニュースを読み込み中...</p></div></section>
+<script>
+(function(){
+  const target=document.getElementById('ncb-news-list');
+  const base=new URL('./',location.href);
+  fetch(new URL('news.json',base),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(items){
+    target.replaceChildren();
+    if(!Array.isArray(items)||!items.length){target.textContent='現在、お知らせはありません。';return}
+    items.slice(0,12).forEach(function(item){
+      const article=document.createElement('article');article.className='event';
+      const date=document.createElement('small');date.textContent=item.date||'';date.style.color='#d5b575';
+      const title=document.createElement('h3');title.textContent=item.title||'お知らせ';
+      const body=document.createElement('p');body.textContent=item.body||'';body.style.whiteSpace='pre-wrap';
+      article.append(date,title,body);
+      if(item.image&&/^\/?[a-zA-Z0-9_./%-]+$/.test(item.image)&&!item.image.includes('..')){
+        const img=document.createElement('img');img.src=new URL(item.image.replace(/^\//,''),base).href;img.alt='';img.loading='lazy';img.style.cssText='width:100%;max-height:240px;object-fit:cover;margin-top:12px';article.append(img);
+      }
+      target.append(article);
+    });
+  }).catch(function(){target.textContent='ニュースを読み込めませんでした。しばらくしてから再読み込みしてください。'});
+})();
+</script>
 </main><footer><strong>NCB · KINGSHOT ALLIANCE</strong><div>Unofficial fan-made alliance website. Not affiliated with KingShot or its publisher.</div><div class="disclaimer">このサイトはNCB同盟向けのファン制作サイトです。ゲーム運営会社の公式サイトではありません。</div><div>© 2026 NCB Alliance</div></footer>
 </body></html>
