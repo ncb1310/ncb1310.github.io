@@ -1,0 +1,28 @@
+
+media:
+  input: media
+  output: /media
+
+content:
+  - name: news
+    label: NCBニュース
+    type: collection
+    path: news
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+    fields:
+      - name: title
+        label: タイトル
+        type: string
+        required: true
+      - name: date
+        label: 公開日
+        type: date
+        required: true
+      - name: image
+        label: 画像
+        type: image
+      - name: body
+        label: 本文
+        type: rich-text
