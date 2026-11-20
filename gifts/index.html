@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ギフトコード登録 | NCB</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0c1017;color:#f6ecd7;font:16px/1.7 system-ui,sans-serif}header,main{max-width:540px;margin:auto;padding:20px}header{border-bottom:1px solid #665a40;color:#dfc38a;letter-spacing:.1em}h1{font-size:28px;margin-bottom:4px}p{color:#d3cbbd}form,section{padding:20px;background:#19212c;border:1px solid #63583f;border-radius:12px;margin:20px 0}label{display:block;margin:12px 0 4px}input,button{font:inherit;border-radius:7px;padding:10px;width:100%}input{background:#0d141e;border:1px solid #82775e;color:white}button{margin-top:18px;background:#e2c48d;color:#151515;border:0;font-weight:bold;cursor:pointer}a{color:#e2c48d}small{color:#c3bdb1}output{display:block;margin-top:12px}button:disabled{opacity:.6}
+</style>
+<header>NCB ／ KINGSHOT</header><main><h1>ギフトコード登録</h1>
+<p id="info">試作画面です。サンプルIDで登録の流れを試せます。入力は送信されません。</p>
+<form id="entry"><label for="player">プレイヤーID</label><input id="player" inputmode="numeric" pattern="[0-9]{1,20}" maxlength="20" required placeholder="ゲーム内のプロフィールで確認">
+<label for="kingdom">王国番号</label><input id="kingdom" inputmode="numeric" pattern="[1-9][0-9]{0,5}" maxlength="6" value="1310" required><small>他の王国の方は、ご自身の王国番号に変更してください。</small>
+<button id="submit">登録を試す</button><output id="status" aria-live="polite"></output></form>
+<a href="https://ks-giftcode.centurygame.com/">公式サイトでコードを交換する ↗</a></main>
+<script>
+let live = false;
+const form = document.querySelector('form');
+const player = document.querySelector("#player");
+const kingdom = document.querySelector("#kingdom");
+const button = document.querySelector('button');
+const statusText = document.querySelector('output');
+if (location.protocol.startsWith('http')) {
+  fetch('/api/gifts/status').then(r => r.json()).then(data => {
+    if (data.registration !== true) return;
+    live = true;
+    document.querySelector('#info').textContent = data.bot ? '登録すると、IDと王国番号をNCBの非公式交換Botに保存し、新しいコードの自動交換に使用します。' : 'ギフトコード交換用にIDと王国番号を保存します。自動交換は準備中です。';
+    button.textContent = 'IDと王国番号を登録する';
+  }).catch(() => {});
+}
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!live) {
+    statusText.textContent = '登録体験が完了しました。王国 ' + kingdom.value + ' ／ ID ' + player.value + '（試作・保存なし）';
+    return;
+  }
+  button.disabled = true;
+  try {
+    const response = await fetch('/api/gifts/register', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({player:player.value,kingdom:kingdom.value})});
+    if (response.status === 409) {
+      statusText.textContent = '登録内容を確認できません。NCB管理者にお問い合わせください。';
+      return;
+    }
+    if (!response.ok) throw new Error();
+    statusText.textContent = '登録を受け付けました。';
+  } catch {
+    statusText.textContent = '登録を確認できませんでした。時間を置いて再度お試しください。';
+  } finally { button.disabled = false; }
+});
+</script></html>
