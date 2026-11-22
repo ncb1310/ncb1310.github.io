@@ -15,44 +15,52 @@
       "first_seen_jst": "2026-11-23T08:29:37+09:00",
       "released_at": null,
       "sources": [
-        "https://kingshotwiki.com/giftcodes/"
+        "https://kingshotwiki.com/giftcodes/",
+        "https://kingshot.net/gift-codes/redeem",
+        "https://kingshot.net/zh-CN/gift-codes/redeem"
       ]
     },
     "FORTHEKINGDOM": {
       "first_seen_jst": "2026-11-23T08:29:37+09:00",
       "released_at": null,
       "sources": [
-        "https://kingshotwiki.com/giftcodes/"
+        "https://kingshotwiki.com/giftcodes/",
+        "https://kingshot.net/gift-codes/redeem",
+        "https://kingshot.net/zh-CN/gift-codes/redeem"
       ]
     },
     "SAYHIHI": {
       "first_seen_jst": "2026-11-23T08:29:37+09:00",
       "released_at": null,
       "sources": [
-        "https://kingshotwiki.com/giftcodes/"
+        "https://kingshotwiki.com/giftcodes/",
+        "https://kingshot.net/gift-codes/redeem",
+        "https://kingshot.net/zh-CN/gift-codes/redeem"
       ]
     },
     "VIP777": {
       "first_seen_jst": "2026-11-23T08:29:37+09:00",
       "released_at": null,
       "sources": [
-        "https://kingshotwiki.com/giftcodes/"
+        "https://kingshotwiki.com/giftcodes/",
+        "https://kingshot.net/gift-codes/redeem",
+        "https://kingshot.net/zh-CN/gift-codes/redeem"
       ]
     }
   },
-  "checked_at_jst": "2026-11-23T08:29:37+09:00",
+  "checked_at_jst": "2026-11-23T08:30:15+09:00",
   "checks": {
     "https://kingshotwiki.com/giftcodes/": {
       "status": "ok",
       "count": 4
     },
     "https://kingshot.net/gift-codes/redeem": {
-      "status": "unavailable",
-      "reason": "No recognizable code list"
+      "status": "ok",
+      "count": 4
     },
     "https://kingshot.net/zh-CN/gift-codes/redeem": {
-      "status": "unavailable",
-      "reason": "No recognizable code list"
+      "status": "ok",
+      "count": 4
     }
   }
 }
