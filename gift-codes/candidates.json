@@ -1,10 +1,58 @@
 {
-  "excluded": ["VIP777", "FORTHEKINGDOM"],
+  "excluded": [
+    "VIP777",
+    "FORTHEKINGDOM"
+  ],
   "candidates": {
     "Bw8Qk3E4j": {
       "first_seen_jst": "2026-11-22T21:58:55+09:00",
       "released_at": null,
-      "sources": ["https://kingshot.net/gift-codes/redeem"]
+      "sources": [
+        "https://kingshot.net/gift-codes/redeem"
+      ]
+    },
+    "1T1G2D2": {
+      "first_seen_jst": "2026-11-23T08:29:37+09:00",
+      "released_at": null,
+      "sources": [
+        "https://kingshotwiki.com/giftcodes/"
+      ]
+    },
+    "FORTHEKINGDOM": {
+      "first_seen_jst": "2026-11-23T08:29:37+09:00",
+      "released_at": null,
+      "sources": [
+        "https://kingshotwiki.com/giftcodes/"
+      ]
+    },
+    "SAYHIHI": {
+      "first_seen_jst": "2026-11-23T08:29:37+09:00",
+      "released_at": null,
+      "sources": [
+        "https://kingshotwiki.com/giftcodes/"
+      ]
+    },
+    "VIP777": {
+      "first_seen_jst": "2026-11-23T08:29:37+09:00",
+      "released_at": null,
+      "sources": [
+        "https://kingshotwiki.com/giftcodes/"
+      ]
+    }
+  },
+  "checked_at_jst": "2026-11-23T08:29:37+09:00",
+  "checks": {
+    "https://kingshotwiki.com/giftcodes/": {
+      "status": "ok",
+      "count": 4
+    },
+    "https://kingshot.net/gift-codes/redeem": {
+      "status": "unavailable",
+      "reason": "No recognizable code list"
+    },
+    "https://kingshot.net/zh-CN/gift-codes/redeem": {
+      "status": "unavailable",
+      "reason": "No recognizable code list"
     }
   }
 }
