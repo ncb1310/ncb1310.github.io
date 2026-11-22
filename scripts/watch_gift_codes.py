@@ -6,6 +6,9 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import WebDriverException
 
 SOURCES = {
     "wiki": "https://kingshotwiki.com/giftcodes/",
@@ -40,6 +43,34 @@ def extract(html, source):
     return codes
 
 
+def rendered_codes(url):
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless=new")
+    with webdriver.Chrome(options=options) as driver:
+        driver.set_page_load_timeout(30)
+        driver.get(url)
+
+        def read_list(browser):
+            soup = BeautifulSoup(browser.page_source, "html.parser")
+            heading = soup.find(lambda tag: tag.name in ("h2", "h3") and
+                                tag.get_text(strip=True).lower() in ("gift codes", "兑换码"))
+            if not heading:
+                return False
+            listing = heading.find_next(["ul", "ol"])
+            if not listing:
+                return False
+            result = set()
+            for row in listing.find_all("li"):
+                if not row.find("input"):
+                    continue
+                token = next(iter(row.stripped_strings), "").split()[0:1]
+                if token and CODE.fullmatch(token[0]):
+                    result.add(token[0])
+            return result or False
+
+        return WebDriverWait(driver, 15).until(read_list)
+
+
 def main():
     now = datetime.now(timezone(timedelta(hours=9))).isoformat(timespec="seconds")
     state = json.loads(LEDGER.read_text())
@@ -48,15 +79,21 @@ def main():
         try:
             request = Request(url, headers={"User-Agent": "NCB-GiftCode-Watcher/1.0"})
             with urlopen(request, timeout=30) as response:
-                codes = extract(response.read(), source)
+                html = response.read()
+            try:
+                codes = extract(html, source)
+            except ValueError:
+                if source == "wiki":
+                    raise
+                codes = rendered_codes(url)
             for code in sorted(codes):
                 entry = state["candidates"].setdefault(code, {
                     "first_seen_jst": now, "released_at": None, "sources": []})
                 if url not in entry["sources"]:
                     entry["sources"].append(url)
             checks[url] = {"status": "ok", "count": len(codes)}
-        except (OSError, ValueError) as exc:
-            checks[url] = {"status": "unavailable", "reason": str(exc)}
+        except (OSError, ValueError, WebDriverException) as exc:
+            checks[url] = {"status": "unavailable", "reason": str(exc).split("Stacktrace:")[0][:200]}
     state.update(checked_at_jst=now, checks=checks)
     LEDGER.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(checks, ensure_ascii=False))
