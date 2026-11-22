@@ -1,12 +1,18 @@
 name: Update NCB news
 on:
+  schedule:
+    - cron: '37 0,12 * * *'
   push:
     branches: [main]
     paths:
       - 'news/**'
       - 'scripts/build_news.py'
+      - 'scripts/collect_game_news.py'
       - '.github/workflows/update-news.yml'
   workflow_dispatch:
+concurrency:
+  group: ncb-news
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
@@ -14,16 +20,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - id: collect
+        continue-on-error: true
+        run: python scripts/collect_game_news.py
       - run: python scripts/build_news.py
       - name: Commit generated news
         run: |
-          if ! git diff --quiet -- news.json; then
+          git add game-news.json news.json
+          if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add news.json
             git commit -m "Auto-update NCB news feed"
+            git pull --rebase origin main
             git push
           fi
+      - if: steps.collect.outcome == 'failure'
+        run: exit 1

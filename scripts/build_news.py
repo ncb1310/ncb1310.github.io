@@ -22,9 +22,13 @@ for file in sorted((root / "news").glob("*.md")):
     items.append({
         "title": fields["title"],
         "date": fields.get("date", ""),
+        "source": fields.get("source", ""),
         "image": fields.get("image", ""),
         "body": body.strip()[:3000],
     })
+cache = root / "game-news.json"
+if cache.exists():
+    items.extend(json.loads(cache.read_text()))
 items.sort(key=lambda x: x["date"], reverse=True)
 (root / "news.json").write_text(json.dumps(items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print(f"Built news.json with {len(items)} article(s)")

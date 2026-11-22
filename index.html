@@ -27,6 +27,9 @@
       const title=document.createElement('h3');title.textContent=item.title||'お知らせ';
       const body=document.createElement('p');body.textContent=item.body||'';body.style.whiteSpace='pre-wrap';
       article.append(date,title,body);
+      if(item.source && /^https:\/\//.test(item.source)){
+        const link=document.createElement('a');link.href=item.source;link.textContent='出典を読む ↗';link.target='_blank';link.rel='noopener noreferrer';article.append(link);
+      }
       if(item.image&&/^\/?[a-zA-Z0-9_./%-]+$/.test(item.image)&&!item.image.includes('..')){
         const img=document.createElement('img');img.src=new URL(item.image.replace(/^\//,''),base).href;img.alt='';img.loading='lazy';img.style.cssText='width:100%;max-height:240px;object-fit:cover;margin-top:12px';article.append(img);
       }
