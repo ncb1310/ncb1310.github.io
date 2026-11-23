@@ -54,9 +54,25 @@
         "https://kingshot.net/gift-codes/redeem",
         "https://kingshot.net/zh-CN/gift-codes/redeem"
       ]
+    },
+    "KS27TGS": {
+      "first_seen_jst": "2026-11-23T22:30:16+09:00",
+      "released_at": null,
+      "sources": [
+        "https://kingshot.net/gift-codes/redeem",
+        "https://kingshot.net/zh-CN/gift-codes/redeem"
+      ]
+    },
+    "THANKS4WORK": {
+      "first_seen_jst": "2026-11-23T22:30:16+09:00",
+      "released_at": null,
+      "sources": [
+        "https://kingshot.net/gift-codes/redeem",
+        "https://kingshot.net/zh-CN/gift-codes/redeem"
+      ]
     }
   },
-  "checked_at_jst": "2026-11-23T16:45:50+09:00",
+  "checked_at_jst": "2026-11-23T22:30:16+09:00",
   "checks": {
     "https://kingshotwiki.com/giftcodes/": {
       "status": "ok",
@@ -64,11 +80,11 @@
     },
     "https://kingshot.net/gift-codes/redeem": {
       "status": "ok",
-      "count": 5
+      "count": 6
     },
     "https://kingshot.net/zh-CN/gift-codes/redeem": {
       "status": "ok",
-      "count": 5
+      "count": 6
     }
   }
 }
