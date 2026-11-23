@@ -46,9 +46,17 @@
         "https://kingshot.net/gift-codes/redeem",
         "https://kingshot.net/zh-CN/gift-codes/redeem"
       ]
+    },
+    "7VAEyXPV7": {
+      "first_seen_jst": "2026-11-23T16:45:50+09:00",
+      "released_at": null,
+      "sources": [
+        "https://kingshot.net/gift-codes/redeem",
+        "https://kingshot.net/zh-CN/gift-codes/redeem"
+      ]
     }
   },
-  "checked_at_jst": "2026-11-23T10:24:36+09:00",
+  "checked_at_jst": "2026-11-23T16:45:50+09:00",
   "checks": {
     "https://kingshotwiki.com/giftcodes/": {
       "status": "ok",
@@ -56,11 +64,11 @@
     },
     "https://kingshot.net/gift-codes/redeem": {
       "status": "ok",
-      "count": 4
+      "count": 5
     },
     "https://kingshot.net/zh-CN/gift-codes/redeem": {
       "status": "ok",
-      "count": 4
+      "count": 5
     }
   }
 }
