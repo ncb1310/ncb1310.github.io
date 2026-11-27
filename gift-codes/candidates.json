@@ -60,7 +60,8 @@
       "released_at": null,
       "sources": [
         "https://kingshot.net/gift-codes/redeem",
-        "https://kingshot.net/zh-CN/gift-codes/redeem"
+        "https://kingshot.net/zh-CN/gift-codes/redeem",
+        "https://kingshotwiki.com/giftcodes/"
       ]
     },
     "THANKS4WORK": {
@@ -76,11 +77,12 @@
       "released_at": null,
       "sources": [
         "https://kingshot.net/gift-codes/redeem",
-        "https://kingshot.net/zh-CN/gift-codes/redeem"
+        "https://kingshot.net/zh-CN/gift-codes/redeem",
+        "https://kingshotwiki.com/giftcodes/"
       ]
     }
   },
-  "checked_at_jst": "2026-11-27T10:29:27+09:00",
+  "checked_at_jst": "2026-11-27T16:31:49+09:00",
   "checks": {
     "https://kingshotwiki.com/giftcodes/": {
       "status": "ok",
